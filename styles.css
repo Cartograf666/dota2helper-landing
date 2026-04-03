@@ -1105,6 +1105,7 @@ a {
 /* Footer */
 .section--footer-top {
   padding: 56px 0 34px;
+  background: var(--bg);
 }
 
 .footer-top {
