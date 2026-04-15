@@ -24,12 +24,96 @@
                 <img class="brand__logo brand__logo--img" src="./assets/logo.png" alt="Dota 2 Helper" />
             </a>
 
-            <nav class="nav" data-i18n-aria="nav_aria" aria-label="Навигация">
+            <nav class="nav" id="site-nav" data-i18n-aria="nav_aria" aria-label="Навигация">
                 <a class="nav__link is-active" href="#top" data-i18n="nav_home">Главная</a>
                 <a class="nav__link" href="#features" data-i18n="nav_features">Функции</a>
                 <a class="nav__link" href="#community" data-i18n="nav_community">Сообщество</a>
-                <a class="nav__link" href="#about" data-i18n="nav_about">О проекте</a>
+                <!--<a class="nav__link" href="#about" data-i18n="nav_about">О проекте</a>-->
+
+                <div class="nav__mobile-only">
+                    <div class="lang" data-lang>
+                    <button class="lang__btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="lang__flag" aria-hidden="true">
+                            <img class="lang__flag-img" src="./assets/lg/ru.png" alt="" width="30" height="22" />
+                        </span>
+                        <span class="lang__label">Русский</span>
+                    </button>
+                    <div class="lang__menu" role="listbox" tabindex="-1" data-i18n-aria="lang_menu_aria"
+                        aria-label="Выбор языка">
+                        <button class="lang__item" type="button" role="option" data-lang-value="zh"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/ch.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>中文</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="en"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/us.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="ru"
+                            aria-selected="true">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/ru.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Русский</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="es"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/sp.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Español</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="pt"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/pt.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Português</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="uk"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/ukr.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Українська</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="id"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/ind.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Bahasa Indonesia</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="ja"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/jp.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>日本語</span>
+                        </button>
+                        <button class="lang__item" type="button" role="option" data-lang-value="de"
+                            aria-selected="false">
+                            <span class="lang__flag" aria-hidden="true">
+                                <img class="lang__flag-img" src="./assets/lg/gr.png" alt="" width="30" height="22" />
+                            </span>
+                            <span>Deutsch</span>
+                        </button>
+                    </div>
+                    </div>
+                </div>
             </nav>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"
+                data-i18n-aria="nav_toggle_open" aria-label="Открыть меню">
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+            </button>
 
             <div class="header-actions">
                 <div class="lang" data-lang>
@@ -106,8 +190,6 @@
                         </button>
                     </div>
                 </div>
-
-                <a class="btn btn--primary" href="#download" data-i18n="btn_download">Скачать</a>
             </div>
         </div>
     </header>
@@ -115,9 +197,8 @@
     <main id="content">
         <section id="top" class="hero">
             <div class="hero__bg" aria-hidden="true"></div>
-            <img class="hero__trader" src="./assets/trader.png" alt="" aria-hidden="true" />
-
-            <div class="container hero__wrap">
+            <div class="hero__trader-stage" aria-hidden="true">
+                <img class="hero__trader" src="./assets/trader.png" alt="" />
                 <div class="hero__notes hero__notes--floating reveal" data-i18n-aria="hero_notes_aria"
                     aria-label="Что умеет">
                     <div class="hero__note" data-i18n="hero_note_1">[01] РАССКАЖЕМ ПРО ГЕРОЕВ</div>
@@ -127,7 +208,9 @@
                 <div class="hero__notes2 hero__note2--floating reveal" data-i18n-aria="hero_note2_aria" aria-label="?">
                     <div class="hero__note2">[?]</div>
                 </div>
+            </div>
 
+            <div class="container hero__wrap">
                 <div class="hero__copy hero__copy--center reveal">
                     <h1 class="hero__title">Dota 2 Helper</h1>
                     <p class="hero__lead" data-i18n="hero_lead">
@@ -149,11 +232,21 @@
                     </div>
 
                     <div class="hero__actions hero__actions--center">
-                        <a class="btn btn--primary btn--lg btn--android" href="#download">
-                            <img class="btn__icon" src="./assets/Frame 10.svg" alt="" width="24" height="24" />
-                            <span data-i18n="btn_android">Android приложение</span>
-                        </a>
-                        <a class="btn btn--ghost btn--lg" href="#about" data-i18n="btn_learn_more">Узнать больше</a>
+                        <div class="store-actions">
+                            <a class="btn btn--primary btn--lg" href="https://www.rustore.ru/catalog/app/my.company">
+                                <img class="btn__icon" src="./assets/icon-RuStore.svg" alt="" width="24" height="24" />
+                                <span data-i18n="btn_rustore">RuStore</span>
+                            </a>
+                            <a class="btn btn--ghost btn--lg" href="https://appgallery.huawei.com/app/C117315315">
+                                <img class="btn__icon" src="./assets/icon-huawei.svg" alt="" width="24" height="24" />
+                                <span data-i18n="btn_appgallery">AppGallery</span>
+                            </a>
+                            <a class="btn btn--ghost btn--lg btn--disabled" href="#" aria-disabled="true" tabindex="-1">
+                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
+                                <span data-i18n="btn_google_play">Google Play</span>
+                                <span class="btn__badge" data-i18n="soon_badge">Скоро</span>
+                            </a>
+                        </div>
                     </div>
                     <p class="app-lang-notice">
                         <span class="app-lang-notice__icons" aria-hidden="true">
@@ -180,11 +273,11 @@
                         height="474" />
                     <div class="features-visual__phone features-visual__phone--slides">
                         <div class="features-visual__slides" data-features-carousel>
-                            <img class="features-visual__slide is-active" src="./assets/screens-phone/iPhone04.png"
+                            <img class="features-visual__slide is-active" src="./assets/screens-phone/iPhone05.png"
                                 alt="" width="390" height="844" />
-                            <img class="features-visual__slide" src="./assets/screens-phone/iPhone05.png" alt=""
-                                width="390" height="844" />
                             <img class="features-visual__slide" src="./assets/screens-phone/iPhone03.png" alt=""
+                                width="390" height="844" />
+                            <img class="features-visual__slide" src="./assets/screens-phone/iPhone04.png" alt=""
                                 width="390" height="844" />
                             <img class="features-visual__slide" src="./assets/screens-phone/iPhone01.png" alt=""
                                 width="390" height="844" />
@@ -201,7 +294,7 @@
                             <img src="./assets/Frame 10.svg" alt="" width="24" height="24" />
                         </div>
                         <h3 class="features-card__title" data-i18n="feature_1_title">Детальные способности героев</h3>
-                        <p class="features-card__text" data-i18n="feature_1_text">Подробные описания способностей,
+                        <p class="features-card__text" data-i18n="feature_1_text">Описания способностей,
                             которых нет даже на официальном
                             сайте</p>
                     </article>
@@ -259,7 +352,7 @@
                         <p class="community-figma__text" data-i18n="community_text">
                             Общайтесь и делитесь сборками, развивайте свои скиллы вместе с другими участниками
                         </p>
-                        <a class="btn btn--ghost btn--lg btn--community" href="#" data-i18n-aria="community_btn_aria"
+                        <a class="btn btn--ghost btn--lg btn--community" href="https://t.me/+vQkVBwDjHRA0YzJi" data-i18n-aria="community_btn_aria"
                             aria-label="Открыть Telegram сообщество">
                             <img src="./assets/tg-icon2.svg" alt="" width="20" height="20" />
                             <span data-i18n="community_btn">Сообщество в Telegram</span>
@@ -284,10 +377,21 @@
                     <h2 class="cta__title" data-i18n="cta_title">Готовы улучшить свою игру?</h2>
                     <p class="cta__text" data-i18n="cta_text">Присоединяйтесь к тысячам игроков, использующих наше
                         приложение</p>
-                    <a class="btn btn--primary btn--lg btn--android" href="#">
-                        <img class="btn__icon" src="./assets/Frame 10.svg" alt="" width="24" height="24" />
-                        <span data-i18n="btn_android">Android приложение</span>
-                    </a>
+                    <div class="store-actions store-actions--cta">
+                        <a class="btn btn--primary btn--lg" href="https://www.rustore.ru/catalog/app/my.company">
+                            <img class="btn__icon" src="./assets/icon-RuStore.svg" alt="" width="24" height="24" />
+                            <span data-i18n="btn_rustore">RuStore</span>
+                        </a>
+                        <a class="btn btn--ghost btn--lg" href="https://appgallery.huawei.com/app/C117315315">
+                            <img class="btn__icon" src="./assets/icon-huawei.svg" alt="" width="24" height="24" />
+                            <span data-i18n="btn_appgallery">AppGallery</span>
+                        </a>
+                        <a class="btn btn--ghost btn--lg btn--disabled" href="#" aria-disabled="true" tabindex="-1">
+                            <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
+                            <span data-i18n="btn_google_play">Google Play</span>
+                            <span class="btn__badge" data-i18n="soon_badge">Скоро</span>
+                        </a>
+                    </div>
                     <p class="app-lang-notice app-lang-notice--cta">
                         <span class="app-lang-notice__icons" aria-hidden="true">
                             <img src="./assets/lg/ru.png" alt="" width="22" height="16" />
@@ -304,32 +408,27 @@
                     <div class="brand brand--footer">
                         <img class="brand__logo brand__logo--img" src="./assets/logo.png" alt="Dota 2 Helper" />
                     </div>
-                    <p class="muted" data-i18n="footer_about">
-                        Всё для Dota 2 в одном месте. Актуальная мета, глубокие гайды и умный пикер.
-                    </p>
                 </div>
 
                 <div class="footer-top__right">
                     <div class="social" data-i18n-aria="social_aria" aria-label="Контакты">
-                        <a class="social__link" href="#" data-i18n-aria="social_telegram" aria-label="Telegram">
+                        <a class="social__link" href="https://t.me/+vQkVBwDjHRA0YzJi" data-i18n-aria="social_telegram" aria-label="Telegram">
                             <img src="./assets/tg-icon.svg" alt="" width="20" height="20" />
                         </a>
-                        <a class="social__link" href="mailto:hello@example.com" data-i18n-aria="social_email"
-                            aria-label="Email">
-                            <img src="./assets/mail-icon.svg" alt="" width="20" height="20" />
+                        <a class="social__link social__link--email" href="mailto:developer.gabes.lab@gmail.com"
+                            data-i18n-aria="social_email" aria-label="Email">
+                            developer.gabes.lab@gmail.com
                         </a>
                     </div>
-                    <a class="btn btn--primary" href="#download" data-i18n="footer_download">Скачать приложение</a>
                 </div>
             </div>
         </section>
 
         <footer class="site-footer">
             <div class="container footer-bottom">
-                <p class="fineprint" data-i18n="disclaimer">
-                    Dota 2 is a registered trademark of Valve Corporation. This site is not affiliated with, associated
-                    with, or endorsed
-                    by Valve Corporation. All game images, data, and assets are the property of Valve Corporation.
+                <p class="fineprint" data-i18n-html="disclaimer">
+                    Dota 2 is a registered trademark of Valve Corporation<br />
+                    This site is not affiliated with, associated with, or endorsed by Valve Corporation
                 </p>
             </div>
         </footer>

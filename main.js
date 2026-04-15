@@ -110,6 +110,11 @@ function applyTranslations(lang) {
   const t = window.SITE_I18N?.[lang];
   if (!t) return;
 
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-html");
+    if (key && t[key] !== undefined) el.innerHTML = t[key];
+  });
+
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     if (key && t[key] !== undefined) el.textContent = t[key];
@@ -124,95 +129,109 @@ function applyTranslations(lang) {
     const key = el.getAttribute("data-i18n-meta");
     if (key && t[key] !== undefined) el.setAttribute("content", t[key]);
   });
+
+  syncNavToggleAria(lang);
+}
+
+function syncNavToggleAria(lang) {
+  const t = window.SITE_I18N?.[lang];
+  const header = document.querySelector(".site-header");
+  const btn = document.querySelector(".nav-toggle");
+  if (!t || !btn) return;
+  const open = header?.classList.contains("is-nav-open");
+  const label = open ? t.nav_toggle_close : t.nav_toggle_open;
+  if (label !== undefined) btn.setAttribute("aria-label", label);
 }
 
 function setupLanguageDropdown() {
-  const root = document.querySelector("[data-lang]");
-  if (!root) return;
+  const roots = Array.from(document.querySelectorAll("[data-lang]"));
+  if (roots.length === 0) return;
 
-  const btn = root.querySelector(".lang__btn");
-  const menu = root.querySelector(".lang__menu");
-  const label = root.querySelector(".lang__label");
-  const flagImg = btn?.querySelector(".lang__flag-img");
-  const items = Array.from(root.querySelectorAll(".lang__item"));
+  function getStored() {
+    const raw = localStorage.getItem("lang");
+    return raw && LANG_OPTIONS[raw] ? raw : "ru";
+  }
 
-  if (!btn || !menu || !label || !flagImg || items.length === 0) return;
-
-  const defaultLang = "ru";
-  const storedRaw = localStorage.getItem("lang");
-  const state = {
-    value: storedRaw && LANG_OPTIONS[storedRaw] ? storedRaw : defaultLang,
-  };
-
-  function apply(value) {
+  function applyToAll(value) {
     const opt = LANG_OPTIONS[value];
     if (!opt) return;
 
-    state.value = value;
     localStorage.setItem("lang", value);
     document.documentElement.lang = opt.htmlLang;
 
-    label.textContent = opt.label;
-    flagImg.src = opt.flag;
-
-    for (const item of items) {
-      const selected = item.dataset.langValue === value;
-      item.setAttribute("aria-selected", String(selected));
+    for (const root of roots) {
+      const btn = root.querySelector(".lang__btn");
+      const label = root.querySelector(".lang__label");
+      const flagImg = btn?.querySelector(".lang__flag-img");
+      const items = Array.from(root.querySelectorAll(".lang__item"));
+      if (label) label.textContent = opt.label;
+      if (flagImg) flagImg.src = opt.flag;
+      for (const item of items) {
+        const selected = item.dataset.langValue === value;
+        item.setAttribute("aria-selected", String(selected));
+      }
     }
 
     applyTranslations(value);
   }
 
-  function open() {
-    root.dataset.open = "true";
-    btn.setAttribute("aria-expanded", "true");
-    menu.focus();
-  }
+  for (const root of roots) {
+    const btn = root.querySelector(".lang__btn");
+    const menu = root.querySelector(".lang__menu");
+    const items = Array.from(root.querySelectorAll(".lang__item"));
+    if (!btn || !menu || items.length === 0) continue;
 
-  function close() {
-    delete root.dataset.open;
-    btn.setAttribute("aria-expanded", "false");
-  }
+    function open() {
+      root.dataset.open = "true";
+      btn.setAttribute("aria-expanded", "true");
+      menu.focus();
+    }
 
-  function toggle() {
-    const isOpen = root.dataset.open === "true";
-    if (isOpen) close();
-    else open();
-  }
+    function close() {
+      delete root.dataset.open;
+      btn.setAttribute("aria-expanded", "false");
+    }
 
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggle();
-  });
+    function toggle() {
+      const isOpen = root.dataset.open === "true";
+      if (isOpen) close();
+      else open();
+    }
 
-  document.addEventListener("click", (e) => {
-    if (!root.contains(e.target)) close();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
-  });
-
-  menu.addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
-    e.preventDefault();
-    const currentIdx = items.findIndex((x) => x.getAttribute("aria-selected") === "true");
-    const dir = e.key === "ArrowDown" ? 1 : -1;
-    const next = items[(currentIdx + dir + items.length) % items.length];
-    next?.focus();
-  });
-
-  for (const item of items) {
-    item.addEventListener("click", () => {
-      const value = item.dataset.langValue;
-      if (!value) return;
-      apply(value);
-      close();
-      btn.focus();
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggle();
     });
+
+    document.addEventListener("click", (e) => {
+      if (!root.contains(e.target)) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+
+    menu.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      e.preventDefault();
+      const currentIdx = items.findIndex((x) => x.getAttribute("aria-selected") === "true");
+      const dir = e.key === "ArrowDown" ? 1 : -1;
+      const next = items[(currentIdx + dir + items.length) % items.length];
+      next?.focus();
+    });
+
+    for (const item of items) {
+      item.addEventListener("click", () => {
+        const value = item.dataset.langValue;
+        if (!value) return;
+        applyToAll(value);
+        close();
+        btn.focus();
+      });
+    }
   }
 
-  apply(state.value);
+  applyToAll(getStored());
 }
 
 setupRevealAnimations();
@@ -522,3 +541,62 @@ function setupCtaVideoBg() {
 }
 
 setupCtaVideoBg();
+
+function setupMobileNav() {
+  const header = document.querySelector(".site-header");
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("site-nav");
+  if (!header || !toggle || !nav) return;
+
+  const mq = window.matchMedia("(max-width: 980px)");
+
+  function getLang() {
+    const raw = localStorage.getItem("lang");
+    return raw && window.SITE_I18N?.[raw] ? raw : "ru";
+  }
+
+  function close() {
+    header.classList.remove("is-nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.classList.remove("is-open");
+    document.body.classList.remove("is-nav-open");
+    syncNavToggleAria(getLang());
+  }
+
+  function open() {
+    header.classList.add("is-nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.classList.add("is-open");
+    document.body.classList.add("is-nav-open");
+    syncNavToggleAria(getLang());
+  }
+
+  function onToggleClick() {
+    if (!mq.matches) return;
+    if (header.classList.contains("is-nav-open")) close();
+    else open();
+  }
+
+  toggle.addEventListener("click", onToggleClick);
+
+  nav.querySelectorAll("a.nav__link").forEach((a) => {
+    a.addEventListener("click", () => {
+      if (mq.matches) close();
+    });
+  });
+
+  mq.addEventListener("change", (e) => {
+    if (!e.matches) close();
+  });
+
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key !== "Escape" || !header.classList.contains("is-nav-open")) return;
+      close();
+    },
+    true
+  );
+}
+
+setupMobileNav();
