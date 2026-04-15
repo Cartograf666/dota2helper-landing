@@ -152,6 +152,8 @@ function setupLanguageDropdown() {
     return raw && LANG_OPTIONS[raw] ? raw : "ru";
   }
 
+  let lastApplied = null;
+
   function applyToAll(value) {
     const opt = LANG_OPTIONS[value];
     if (!opt) return;
@@ -173,6 +175,11 @@ function setupLanguageDropdown() {
     }
 
     applyTranslations(value);
+
+    if (lastApplied !== value) {
+      trackEvent("select_language", { language: value });
+      lastApplied = value;
+    }
   }
 
   for (const root of roots) {
@@ -236,6 +243,104 @@ function setupLanguageDropdown() {
 
 setupRevealAnimations();
 setupLanguageDropdown();
+
+function trackEvent(name, params) {
+  if (typeof window.gtag !== "function") return;
+  try {
+    window.gtag("event", name, params ?? {});
+  } catch {
+    // ignore analytics failures
+  }
+}
+
+function setupAnalyticsEvents() {
+  function isExternalUrl(url) {
+    try {
+      const u = new URL(url, window.location.href);
+      return u.origin !== window.location.origin && (u.protocol === "http:" || u.protocol === "https:");
+    } catch {
+      return false;
+    }
+  }
+
+  function sendOutbound(label, url, onDone) {
+    if (typeof window.gtag !== "function") {
+      onDone?.();
+      return;
+    }
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      onDone?.();
+    };
+
+    window.gtag("event", "outbound_click", {
+      event_category: "outbound",
+      event_label: label,
+      link_url: url,
+      transport_type: "beacon",
+      event_callback: finish,
+    });
+
+    // Fallback if callback never fires (blocked/slow)
+    window.setTimeout(finish, 450);
+  }
+
+  document.addEventListener(
+    "click",
+    (e) => {
+      const a = e.target?.closest?.("a");
+      if (!a) return;
+      if (a.getAttribute("aria-disabled") === "true") return;
+      if (a.getAttribute("tabindex") === "-1") return;
+
+      const href = a.getAttribute("href");
+      if (!href) return;
+
+      const analyticsKey = a.getAttribute("data-analytics");
+      const label = analyticsKey || href;
+
+      const isMailto = href.startsWith("mailto:");
+      const isTel = href.startsWith("tel:");
+      const isHash = href.startsWith("#");
+
+      if (isMailto) {
+        trackEvent("contact_email_click", { event_category: "contact", event_label: label });
+        return;
+      }
+
+      if (isTel) {
+        trackEvent("contact_phone_click", { event_category: "contact", event_label: label });
+        return;
+      }
+
+      if (isHash) {
+        trackEvent("nav_anchor_click", { event_category: "navigation", event_label: href });
+        return;
+      }
+
+      if (!isExternalUrl(href)) return;
+
+      // If link opens in a new tab, don’t block navigation.
+      const target = a.getAttribute("target");
+      if (target === "_blank") {
+        trackEvent("outbound_click", { event_category: "outbound", event_label: label, link_url: href });
+        return;
+      }
+
+      // Same-tab external: try to send beacon before navigating.
+      e.preventDefault();
+      sendOutbound(label, href, () => {
+        window.location.href = href;
+      });
+    },
+    true
+  );
+}
+
+setupAnalyticsEvents();
 
 function setupPhoneTilt() {
   const stage = document.querySelector("[data-tilt]");
