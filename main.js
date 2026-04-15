@@ -666,6 +666,7 @@ function setupMobileNav() {
     toggle.classList.remove("is-open");
     document.body.classList.remove("is-nav-open");
     syncNavToggleAria(getLang());
+    trackEvent("mobile_nav_toggle", { state: "closed" });
   }
 
   function open() {
@@ -674,6 +675,7 @@ function setupMobileNav() {
     toggle.classList.add("is-open");
     document.body.classList.add("is-nav-open");
     syncNavToggleAria(getLang());
+    trackEvent("mobile_nav_toggle", { state: "open" });
   }
 
   function onToggleClick() {
@@ -686,6 +688,10 @@ function setupMobileNav() {
 
   nav.querySelectorAll("a.nav__link").forEach((a) => {
     a.addEventListener("click", () => {
+      const href = a.getAttribute("href") || "";
+      if (href) {
+        trackEvent("nav_click", { event_category: "navigation", event_label: href });
+      }
       if (mq.matches) close();
     });
   });
@@ -705,3 +711,41 @@ function setupMobileNav() {
 }
 
 setupMobileNav();
+
+function setupSectionImpressions() {
+  const sections = [
+    { id: "top", name: "hero" },
+    { id: "features", name: "features" },
+    { id: "community", name: "community" },
+    { id: "download", name: "download" },
+    { id: "about", name: "about" },
+  ];
+
+  const els = sections
+    .map((s) => ({ ...s, el: document.getElementById(s.id) }))
+    .filter((x) => x.el);
+
+  if (els.length === 0) return;
+
+  const seen = new Set();
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const threshold = reduced ? 0.01 : 0.25;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const id = entry.target.id;
+        if (!id || seen.has(id)) continue;
+        seen.add(id);
+        trackEvent("section_view", { event_category: "engagement", event_label: id });
+        io.unobserve(entry.target);
+      }
+    },
+    { threshold, rootMargin: "0px 0px -20% 0px" }
+  );
+
+  for (const { el } of els) io.observe(el);
+}
+
+setupSectionImpressions();
