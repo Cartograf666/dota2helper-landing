@@ -1606,7 +1606,17 @@ body.is-nav-open {
     font-size: 16px;
   }
 
-  .lang__label {
+  /* Keep language name visible in the mobile nav menu */
+  .nav .lang__label {
+    display: inline;
+  }
+
+  .nav .lang__btn {
+    gap: 12px;
+  }
+
+  /* Hide label only in header language button (when present) */
+  .header-actions .lang__label {
     display: none;
   }
 
