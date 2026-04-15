@@ -2,6 +2,17 @@
 <html lang="ru">
 
 <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WJECVHDM5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-1WJECVHDM5', { anonymize_ip: true });
+    </script>
+
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="meta_title">Dota 2 Helper</title>
@@ -32,78 +43,87 @@
 
                 <div class="nav__mobile-only">
                     <div class="lang" data-lang>
-                    <button class="lang__btn" type="button" aria-haspopup="listbox" aria-expanded="false">
-                        <span class="lang__flag" aria-hidden="true">
-                            <img class="lang__flag-img" src="./assets/lg/ru.png" alt="" width="30" height="22" />
-                        </span>
-                        <span class="lang__label">Русский</span>
-                    </button>
-                    <div class="lang__menu" role="listbox" tabindex="-1" data-i18n-aria="lang_menu_aria"
-                        aria-label="Выбор языка">
-                        <button class="lang__item" type="button" role="option" data-lang-value="zh"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/ch.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>中文</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="en"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/us.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>English</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="ru"
-                            aria-selected="true">
+                        <button class="lang__btn" type="button" aria-haspopup="listbox" aria-expanded="false">
                             <span class="lang__flag" aria-hidden="true">
                                 <img class="lang__flag-img" src="./assets/lg/ru.png" alt="" width="30" height="22" />
                             </span>
-                            <span>Русский</span>
+                            <span class="lang__label">Русский</span>
                         </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="es"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/sp.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>Español</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="pt"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/pt.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>Português</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="uk"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/ukr.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>Українська</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="id"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/ind.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>Bahasa Indonesia</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="ja"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/jp.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>日本語</span>
-                        </button>
-                        <button class="lang__item" type="button" role="option" data-lang-value="de"
-                            aria-selected="false">
-                            <span class="lang__flag" aria-hidden="true">
-                                <img class="lang__flag-img" src="./assets/lg/gr.png" alt="" width="30" height="22" />
-                            </span>
-                            <span>Deutsch</span>
-                        </button>
-                    </div>
+                        <div class="lang__menu" role="listbox" tabindex="-1" data-i18n-aria="lang_menu_aria"
+                            aria-label="Выбор языка">
+                            <button class="lang__item" type="button" role="option" data-lang-value="zh"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/ch.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>中文</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="en"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/us.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>English</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="ru"
+                                aria-selected="true">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/ru.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Русский</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="es"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/sp.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Español</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="pt"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/pt.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Português</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="uk"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/ukr.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Українська</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="id"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/ind.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Bahasa Indonesia</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="ja"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/jp.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>日本語</span>
+                            </button>
+                            <button class="lang__item" type="button" role="option" data-lang-value="de"
+                                aria-selected="false">
+                                <span class="lang__flag" aria-hidden="true">
+                                    <img class="lang__flag-img" src="./assets/lg/gr.png" alt="" width="30"
+                                        height="22" />
+                                </span>
+                                <span>Deutsch</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -242,7 +262,8 @@
                                 <span data-i18n="btn_appgallery">AppGallery</span>
                             </a>
                             <a class="btn btn--ghost btn--lg btn--disabled" href="#" aria-disabled="true" tabindex="-1">
-                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
+                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24"
+                                    height="24" />
                                 <span data-i18n="btn_google_play">Google Play</span>
                                 <span class="btn__badge" data-i18n="soon_badge">Скоро</span>
                             </a>
@@ -352,8 +373,8 @@
                         <p class="community-figma__text" data-i18n="community_text">
                             Общайтесь и делитесь сборками, развивайте свои скиллы вместе с другими участниками
                         </p>
-                        <a class="btn btn--ghost btn--lg btn--community" href="https://t.me/+vQkVBwDjHRA0YzJi" data-i18n-aria="community_btn_aria"
-                            aria-label="Открыть Telegram сообщество">
+                        <a class="btn btn--ghost btn--lg btn--community" href="https://t.me/+vQkVBwDjHRA0YzJi"
+                            data-i18n-aria="community_btn_aria" aria-label="Открыть Telegram сообщество">
                             <img src="./assets/tg-icon2.svg" alt="" width="20" height="20" />
                             <span data-i18n="community_btn">Сообщество в Telegram</span>
                         </a>
@@ -412,7 +433,8 @@
 
                 <div class="footer-top__right">
                     <div class="social" data-i18n-aria="social_aria" aria-label="Контакты">
-                        <a class="social__link" href="https://t.me/+vQkVBwDjHRA0YzJi" data-i18n-aria="social_telegram" aria-label="Telegram">
+                        <a class="social__link" href="https://t.me/+vQkVBwDjHRA0YzJi" data-i18n-aria="social_telegram"
+                            aria-label="Telegram">
                             <img src="./assets/tg-icon.svg" alt="" width="20" height="20" />
                         </a>
                         <a class="social__link social__link--email" href="mailto:developer.gabes.lab@gmail.com"
