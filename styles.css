@@ -315,6 +315,15 @@ body.is-nav-open {
   justify-content: center;
 }
 
+/* Google Play Toggle Utility */
+[data-gp-active="false"] .gp-active {
+  display: none !important;
+}
+
+[data-gp-active="true"] .gp-soon {
+  display: none !important;
+}
+
 /* Language dropdown */
 .lang {
   position: relative;

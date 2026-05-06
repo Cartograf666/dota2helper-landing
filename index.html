@@ -250,7 +250,7 @@
                     </div>
 
                     <div class="hero__actions hero__actions--center">
-                        <div class="store-actions">
+                        <div class="store-actions" data-gp-active="false">
                             <a class="btn btn--primary btn--lg" href="https://www.rustore.ru/catalog/app/my.company"
                                 data-analytics="rustore">
                                 <img class="btn__icon" src="./assets/icon-RuStore.svg" alt="" width="24" height="24" />
@@ -261,11 +261,16 @@
                                 <img class="btn__icon" src="./assets/icon-huawei.svg" alt="" width="24" height="24" />
                                 <span data-i18n="btn_appgallery">AppGallery</span>
                             </a>
-                            <a class="btn btn--ghost btn--lg btn--disabled" href="#" aria-disabled="true" tabindex="-1">
-                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24"
-                                    height="24" />
+                            
+                            <!-- Google Play: Change data-gp-active="true" on parent to activate -->
+                            <a class="btn btn--ghost btn--lg btn--disabled gp-soon" href="#" aria-disabled="true" tabindex="-1">
+                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
                                 <span data-i18n="btn_google_play">Google Play</span>
                                 <span class="btn__badge" data-i18n="soon_badge">Скоро</span>
+                            </a>
+                            <a class="btn btn--ghost btn--lg gp-active" href="https://play.google.com/store/apps/details?id=com.alexter.dota2helper" target="_blank" data-analytics="google_play">
+                                <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
+                                <span data-i18n="btn_google_play">Google Play</span>
                             </a>
                         </div>
                     </div>
@@ -399,7 +404,7 @@
                     <h2 class="cta__title" data-i18n="cta_title">Готовы улучшить свою игру?</h2>
                     <p class="cta__text" data-i18n="cta_text">Присоединяйтесь к тысячам игроков, использующих наше
                         приложение</p>
-                    <div class="store-actions store-actions--cta">
+                    <div class="store-actions store-actions--cta" data-gp-active="false">
                         <a class="btn btn--primary btn--lg" href="https://www.rustore.ru/catalog/app/my.company"
                             data-analytics="rustore">
                             <img class="btn__icon" src="./assets/icon-RuStore.svg" alt="" width="24" height="24" />
@@ -410,10 +415,16 @@
                             <img class="btn__icon" src="./assets/icon-huawei.svg" alt="" width="24" height="24" />
                             <span data-i18n="btn_appgallery">AppGallery</span>
                         </a>
-                        <a class="btn btn--ghost btn--lg btn--disabled" href="#" aria-disabled="true" tabindex="-1">
+                        
+                        <!-- Google Play: Change data-gp-active="true" on parent to activate -->
+                        <a class="btn btn--ghost btn--lg btn--disabled gp-soon" href="#" aria-disabled="true" tabindex="-1">
                             <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
                             <span data-i18n="btn_google_play">Google Play</span>
                             <span class="btn__badge" data-i18n="soon_badge">Скоро</span>
+                        </a>
+                        <a class="btn btn--ghost btn--lg gp-active" href="https://play.google.com/store/apps/details?id=com.alexter.dota2helper" target="_blank" data-analytics="google_play">
+                            <img class="btn__icon" src="./assets/icons-googleplay.svg" alt="" width="24" height="24" />
+                            <span data-i18n="btn_google_play">Google Play</span>
                         </a>
                     </div>
                     <p class="app-lang-notice app-lang-notice--cta">
